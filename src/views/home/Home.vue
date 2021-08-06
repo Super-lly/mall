@@ -8,12 +8,25 @@
 
 <script>
 import NavBar from "components/common/navbar/NavBar.vue";
+import {getHomeMultidata} from "network/home.js"
 
 export default {
   name: "Home",
   components: {
     NavBar,
   },
+  data(){
+    return {
+      banners:[],
+      recommends:[]
+    }
+  },
+  create(){
+    getHomeMultidata().then(res =>{
+      this.banners = res.data.banner.list
+      this.recommends = res.data.recommend.list
+    })
+  }
 };
 </script>
 
