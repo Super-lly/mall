@@ -4,22 +4,116 @@
     <home-swiper :banners="banners" />
     <recommend-view :recommends="recommends"/>
     <feature-view/>
+    <tab-control :titles="['流行','新款','精选']" class="tab-control"/>
+    <ul>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+      <li>li</li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HomeSwiper from "./childComps/HomeSwiper";
-import NavBar from "components/common/navbar/NavBar";
-import {getHomeMultidata} from "network/home";
+// 子组件
+import HomeSwiper from "./childComps/HomeSwiper"
 import RecommendView from "./childComps/RecommendView.vue"
 import FeatureView from "./childComps/FeatureView.vue"
+// 公共组件
+import NavBar from "components/common/navbar/NavBar"
+import TabControl from "components/content/tabControl/TabControl"
+// 方法
+import {getHomeMultidata} from "network/home"
+
 export default {
   name: "Home",
   components: {
     HomeSwiper,
-    NavBar,
     RecommendView,
-    FeatureView
+    FeatureView,
+    NavBar,
+    TabControl,
+    TabControl
   },
   data() {
     return {
@@ -52,5 +146,9 @@ export default {
   top: 0;
   left: 0;
   right: 0; */
+}
+.tab-control{
+  position: sticky;
+  top: 44px;
 }
 </style>
