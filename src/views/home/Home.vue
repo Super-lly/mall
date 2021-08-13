@@ -122,7 +122,7 @@ export default {
   padding-bottom: 50px;
 }
 .content{
-  height: (100vh);
+  height: 100%;
   /* overflow: hidden; */
 }
 </style>
