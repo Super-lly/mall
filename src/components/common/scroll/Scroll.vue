@@ -8,19 +8,44 @@
 
 <script>
   import BScroll from 'better-scroll'
+  import Pullup from '@better-scroll/pull-up'
+  BScroll.use(Pullup)
   export default {
     name: "Scroll",
+    props: {
+      probeType: {
+        type: Number,
+        default: 0
+      }
+    },
     data() {
       return {
-        scroll: null,
+        scroll: null, 
       }
     },
     mounted() {
       // 1.创建BScroll对象
       this.scroll = new BScroll(this.$refs.wrapper, {
-        observeDOM:true
+        observeDOM:true,
+        pullUpLoad: true,
+        probeType:this.probeType,
+        pullUpLoad: this.pullUpLoad
+      }),
+      this.scroll.on('scroll', (position) => {
+        this.$emit('scroll', position)
       })
+      // this.scroll.on('pullingUp', () => {
+      //   this.$emit('pullingUp')
+      // })
     },
+    methods:{
+      scrollTo(x, y, time=500) {
+        this.scroll.scrollTo(x, y, time)
+      },
+      // finishPullUp() {
+      //   this.scroll.finishPullUp()
+      // }
+    }
   }
 </script>
 
