@@ -6,6 +6,7 @@
       ref="scroll"
       @scroll="contentScroll"
       :probeType="3"
+      :pull-up-load="true"
     >
       <home-swiper :banners="banners" />
       <recommend-view :recommends="recommends" />
@@ -70,6 +71,11 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+  mounted() {
+    this.$bus.$on("itemImageLoad", () => {
+      this.$refs.scroll.refresh();
+    });
+  },
   computed: {
     showGoods() {
       return this.goods[this.currentType].list;
@@ -92,9 +98,9 @@ export default {
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
-    loadMore() {
-      this.getHomeGoods(this.currentType);
-    },
+    // loadMore() {
+    //   this.getHomeGoods(this.currentType);
+    // },
     contentScroll(position) {
       this.isShowBackTop = -position.y > 1000;
     },
@@ -108,7 +114,6 @@ export default {
     getHomeGoods(type) {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then((res) => {
-        // console.log(res.data.list);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
         // this.$refs.scroll.finishPullUp()
