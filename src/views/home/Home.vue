@@ -5,8 +5,9 @@
       class="content"
       ref="scroll"
       @scroll="contentScroll"
-      :probeType="3"
+      :probe-type="3"
       :pull-up-load="true"
+      @pullingUp="loadMore"
     >
       <home-swiper :banners="banners" />
       <recommend-view :recommends="recommends" />
@@ -33,9 +34,10 @@ import Scroll from "components/common/scroll/Scroll";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import BackTop from "components/content/backTop/BackTop";
+import GoodsListItem from "components/content/goods/GoodsListItem.vue";
 // 方法
 import { getHomeMultidata, getHomeGoods } from "network/home";
-import GoodsListItem from "../../components/content/goods/GoodsListItem.vue";
+import {debounce} from "common/utils"
 
 export default {
   name: "Home",
@@ -72,8 +74,9 @@ export default {
     this.getHomeGoods("sell");
   },
   mounted() {
+    const refresh = debounce(this.$refs.scroll.refresh,50)
     this.$bus.$on("itemImageLoad", () => {
-      this.$refs.scroll.refresh();
+      refresh()
     });
   },
   computed: {
@@ -98,9 +101,9 @@ export default {
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
-    // loadMore() {
-    //   this.getHomeGoods(this.currentType);
-    // },
+    loadMore() {
+      this.getHomeGoods(this.currentType);
+    },
     contentScroll(position) {
       this.isShowBackTop = -position.y > 1000;
     },
@@ -116,7 +119,7 @@ export default {
       getHomeGoods(type, page).then((res) => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
-        // this.$refs.scroll.finishPullUp()
+        this.$refs.scroll.finishPullUp()
       });
     },
   },
