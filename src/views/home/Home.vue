@@ -78,8 +78,8 @@ export default {
     };
   },
   activated(){
-    this.$refs.scroll.refresh()
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    this.$refs.scroll.refresh()
   },
   deactivated(){
     this.saveY = this.$refs.scroll.scroll.y
@@ -92,7 +92,7 @@ export default {
     this.getHomeGoods("sell");
   },
   mounted() {
-    const refresh = debounce(this.$refs.scroll.refresh, 50);
+    const refresh = debounce(this.$refs.scroll.refresh,50);
     this.$bus.$on("itemImageLoad", () => {
       refresh();
     });
